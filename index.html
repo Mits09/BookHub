@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHub - Your Book Library</title>
+    <style>
+        /* Original CSS remains the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 0;
+            margin: 0;
+        }
+
+        header {
+            background-color: #6A1B9A; 
+            color: #fff;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        nav {
+            background-color: #333; 
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #4CAF50;
+        }
+
+        /* New Book Grid Styles */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .book-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .book-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .book-item a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 15px;
+        }
+
+        .book-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .book-item h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+        .genre {
+            color: #6A1B9A;
+            font-style: italic;
+        }
+
+        /* Original info-section remains the same */
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 50px;
+            margin: 20px;
+        }
+
+        .info-section img {
+            width: 500px; 
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .info-section .text-box {
+            width: 50%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        #search {
+            background-color: #fff;
+            text-align: center;
+            padding: 50px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #search h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #search form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #search input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            font-size: 1.1em;
+            margin-right: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #search input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #search input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            font-size: 0.9em;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            /* Original mobile styles remain */
+            .book-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .book-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .book-item img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to BookHub</h1>
+        <p>Your one-stop destination for exploring and reviewing books!</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="login.jsp">Login</a></li>
+            <li><a href="register.jsp">Register</a></li>
+            <li><a href="Books.jsp">My Books</a></li>
+            <li><a href="contact.jsp">Feedback</a></li>
+        </ul>
+    </nav>
+
+    <section id="search">
+        <h2>Search for a Book</h2>
+        <form action="SearchBooksServlet" method="GET">
+            <input type="text" name="query" placeholder="Enter book title or author" required>
+            <input type="submit" value="Search">
+        </form>
+    </section>
+
+    
+    <section class="book-grid">
+        <div class="book-item">
+            <a href="book1.jsp">
+                <img src="images/book1.jpg" alt="To Kill a Mockingbird">
+                <h3>To Kill a Mockingbird</h3>
+                <p class="genre">Classic Fiction</p>
+            </a>
+        </div>
+        <div class="book-item">
+            <a href="book2.jsp">
+                <img src="images/book2.jpg" alt="1984">
+                <h3>1984</h3>
+                <p class="genre">Dystopian Fiction</p>
+            </a>
+        </div>
+        <div class="book-item">
+            <a href="book3.jsp">
+                <img src="images/book3.jpg" alt="The Great Gatsby">
+                <h3>The Great Gatsby</h3>
+                <p class="genre">Literary Fiction</p>
+            </a>
+        </div>
+        <div class="book-item">
+            <a href="book4.jsp">
+                <img src="images/bookk4.jpg" alt="Pride and Prejudice">
+                <h3>Pride and Prejudice</h3>
+                <p class="genre">Romance</p>
+            </a>
+        </div>
+        <div class="book-item">
+            <a href="book5.jsp">
+                <img src="images/bookk5.jpg" alt="The Hobbit">
+                <h3>The Hobbit</h3>
+                <p class="genre">Fantasy</p>
+            </a>
+        </div>
+        <div class="book-item">
+            <a href="book6.jsp">
+                <img src="images/book6.jpg" alt="Brave New World">
+                <h3>Brave New World</h3>
+                <p class="genre">Science Fiction</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <img src="images/index.jpg" alt="Books Image">
+        <div class="text-box">
+            <h2> Good to Read</h2>
+            <p>Books are a source of knowledge and wisdom. They can transport us to different worlds, introduce us to new ideas, and provide insights into the experiences of others. Reading fosters critical thinking and broadens our horizons. Books have the power to influence, inform, and inspire, making them an essential part of personal growth and education.Reading is one of the most powerful tools for personal growth, knowledge, and imagination. It allows us to explore different perspectives, cultures, and ideas, helping us become more informed and open-minded individuals. Books provide insights into history, science, philosophy, and human emotions, enabling us to learn from the experiences of others. Whether it is fiction or non-fiction, reading expands our understanding of the world and improves our critical thinking skills.
+
+Beyond knowledge, reading also enhances creativity and empathy. Moreover, reading strengthens vocabulary, improves communication skills, and boosts cognitive functions such as memory and concentration. Unlike passive entertainment like television or social media, reading actively engages the mind, making it a productive and enriching habit.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 BookHub. Mitali Deshmukh.All rights reserved.</p>
+    </footer>
+</body>
+</html>
